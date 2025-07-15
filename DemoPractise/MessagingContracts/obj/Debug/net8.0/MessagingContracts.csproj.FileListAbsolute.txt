@@ -1,0 +1,12 @@
+C:\Users\user\OneDrive\Desktop\Tral\.NetConfigDemo\DemoPractise\MessagingContracts\bin\Debug\net8.0\MessagingContracts.deps.json
+C:\Users\user\OneDrive\Desktop\Tral\.NetConfigDemo\DemoPractise\MessagingContracts\bin\Debug\net8.0\MessagingContracts.dll
+C:\Users\user\OneDrive\Desktop\Tral\.NetConfigDemo\DemoPractise\MessagingContracts\bin\Debug\net8.0\MessagingContracts.pdb
+C:\Users\user\OneDrive\Desktop\Tral\.NetConfigDemo\DemoPractise\MessagingContracts\obj\Debug\net8.0\MessagingContracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\OneDrive\Desktop\Tral\.NetConfigDemo\DemoPractise\MessagingContracts\obj\Debug\net8.0\MessagingContracts.AssemblyInfoInputs.cache
+C:\Users\user\OneDrive\Desktop\Tral\.NetConfigDemo\DemoPractise\MessagingContracts\obj\Debug\net8.0\MessagingContracts.AssemblyInfo.cs
+C:\Users\user\OneDrive\Desktop\Tral\.NetConfigDemo\DemoPractise\MessagingContracts\obj\Debug\net8.0\MessagingContracts.csproj.CoreCompileInputs.cache
+C:\Users\user\OneDrive\Desktop\Tral\.NetConfigDemo\DemoPractise\MessagingContracts\obj\Debug\net8.0\MessagingContracts.sourcelink.json
+C:\Users\user\OneDrive\Desktop\Tral\.NetConfigDemo\DemoPractise\MessagingContracts\obj\Debug\net8.0\MessagingContracts.dll
+C:\Users\user\OneDrive\Desktop\Tral\.NetConfigDemo\DemoPractise\MessagingContracts\obj\Debug\net8.0\refint\MessagingContracts.dll
+C:\Users\user\OneDrive\Desktop\Tral\.NetConfigDemo\DemoPractise\MessagingContracts\obj\Debug\net8.0\MessagingContracts.pdb
+C:\Users\user\OneDrive\Desktop\Tral\.NetConfigDemo\DemoPractise\MessagingContracts\obj\Debug\net8.0\ref\MessagingContracts.dll

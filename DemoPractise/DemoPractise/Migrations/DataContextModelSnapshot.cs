@@ -53,6 +53,65 @@ namespace DemoPractise.Migrations
 
                     b.ToTable("Products");
                 });
+
+            modelBuilder.Entity("DemoPractise.Models.WebHookDeliveryAttempt", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Payload")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ResponseStatusCode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SubscriptionId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Success")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubscriptionId");
+
+                    b.ToTable("WebhooksDeliveryAttempts");
+                });
+
+            modelBuilder.Entity("DemoPractise.Models.WebHookSubscription", b =>
+                {
+                    b.Property<string>("SubscriptionId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOnUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EventType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WebHookUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SubscriptionId");
+
+                    b.ToTable("Webhooks");
+                });
+
+            modelBuilder.Entity("DemoPractise.Models.WebHookDeliveryAttempt", b =>
+                {
+                    b.HasOne("DemoPractise.Models.WebHookSubscription", null)
+                        .WithMany()
+                        .HasForeignKey("SubscriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 #pragma warning restore 612, 618
         }
     }

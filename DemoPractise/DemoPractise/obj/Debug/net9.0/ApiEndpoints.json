@@ -380,16 +380,16 @@
     ]
   },
   {
-    "ContainingType": "Program\u002B\u003C\u003Ec",
-    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_1",
-    "RelativePath": "minimalApi/products/{productId:int}",
-    "HttpMethod": "GET",
+    "ContainingType": "DemoPractise.Controllers.WebHookEndpoints",
+    "Method": "CreateWebHook",
+    "RelativePath": "api/webhooks/",
+    "HttpMethod": "POST",
     "IsController": false,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "productId",
-        "Type": "System.Int32",
+        "Name": "request",
+        "Type": "DemoPractise.Models.CreateWebHookRequest",
         "IsRequired": true
       }
     ],
@@ -399,6 +399,7 @@
         "MediaTypes": [],
         "StatusCode": 200
       }
-    ]
+    ],
+    "EndpointName": "CreateWebHook"
   }
 ]

@@ -3,6 +3,7 @@ using DemoPractise.Extensions;
 using DemoPractise.Interfaces;
 using DemoPractise.Models;
 using DemoPractise.Records.Product;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
 namespace DemoPractise.Services;
@@ -10,9 +11,11 @@ namespace DemoPractise.Services;
 public class ProductService : IProductService
 {
     private readonly DataContext _context;
-    public ProductService(DataContext context)
+    private readonly IPublishEndpoint _bus;
+    public ProductService(DataContext context, IPublishEndpoint bus)
     {
         _context = context;
+        _bus = bus;
     }
     public async Task<Result<ProductRecord>> AddProductAsync(CreateProductRecord createProductRecord)
     {
@@ -21,6 +24,8 @@ public class ProductService : IProductService
             var product = AddProduct(createProductRecord);
             var result = await _context.Products.AddAsync(product);
             await _context.SaveChangesAsync();
+            var message = result.Entity.MapToCreated();
+            await _bus.Publish(message);
             return new Result<ProductRecord> { Success = true, StatusCode = 201, Data = result.Entity.ToProductRecord() };
 
         }
@@ -39,6 +44,8 @@ public class ProductService : IProductService
             if (product == null) return new Result<bool> { Success = false, StatusCode = 404, Message = "Product not found" };
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
+            var message = product.MapToDeleted();
+            await _bus.Publish(message);
             return new Result<bool> { Success = true, StatusCode = 204, Message = "Product deleted successfully" };
         }
         catch
@@ -106,6 +113,8 @@ public class ProductService : IProductService
             product.ProductDescription = productRecord.ProductDescription;
             product.Price = productRecord.Price;
             await _context.SaveChangesAsync();
+            var message = product.MapToUpdated();
+            await _bus.Publish(message);
             return new Result<bool> { Success = true, StatusCode = 204, Message = "Product updated successfully" };
         }
         catch

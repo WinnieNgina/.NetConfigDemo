@@ -10,5 +10,16 @@ public class DataContext : DbContext
 
     }
     public DbSet<Product> Products { get; set; }
+    public DbSet<WebHookSubscription> Webhooks { get; set; }
+    public DbSet<WebHookDeliveryAttempt> WebhooksDeliveryAttempts { get; set; }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<WebHookDeliveryAttempt>(builder =>
+        {
+            builder.HasOne<WebHookSubscription>()
+                .WithMany()
+                .HasForeignKey(d => d.SubscriptionId);
+        });
+    }
 
 }

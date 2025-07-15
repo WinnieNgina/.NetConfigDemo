@@ -5,29 +5,6 @@
     "version": "1.0"
   },
   "paths": {
-    "/minimalApi/products/{productId}": {
-      "get": {
-        "tags": [
-          "DemoPractise"
-        ],
-        "parameters": [
-          {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/products": {
       "get": {
         "tags": [
@@ -519,6 +496,29 @@
           }
         }
       }
+    },
+    "/api/webhooks": {
+      "post": {
+        "tags": [
+          "WebHookEndpoints"
+        ],
+        "operationId": "CreateWebHook",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWebHookRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -537,6 +537,20 @@
           "price": {
             "type": "number",
             "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateWebHookRequest": {
+        "type": "object",
+        "properties": {
+          "eventType": {
+            "type": "string",
+            "nullable": true
+          },
+          "webhookUrl": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

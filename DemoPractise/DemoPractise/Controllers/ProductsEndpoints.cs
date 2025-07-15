@@ -1,6 +1,7 @@
 ﻿using Carter;
 using DemoPractise.Interfaces;
 using DemoPractise.Records.Product;
+using DemoPractise.Services;
 using FluentValidation;
 
 namespace DemoPractise.Controllers;
@@ -63,7 +64,9 @@ public class ProductsEndpoints : ICarterModule
     }
 
 
-    public static async Task<IResult> CreateProduct(CreateProductRecord createProductRecord, IValidator<CreateProductRecord> _validation, IProductService productService, LinkGenerator linkGenerator)
+    public static async Task<IResult> CreateProduct(CreateProductRecord createProductRecord,
+        IValidator<CreateProductRecord> _validation,
+        IProductService productService,WebhookDispatcher webhookDispatcher)
     {
         var validationResult = await _validation.ValidateAsync(createProductRecord);
         if (!validationResult.IsValid)
@@ -74,8 +77,9 @@ public class ProductsEndpoints : ICarterModule
         var result = await productService.AddProductAsync(createProductRecord);
         if (result.Success)
         {
-            var url = linkGenerator.GetPathByName("GetProduct", new { id = result.Data.ProductId });
-            return TypedResults.Created(url, result.Data);
+            await webhookDispatcher.DispatchAsync("product.created", result.Data);
+            // var url = linkGenerator.GetPathByName("GetProduct", new { id = result.Data.ProductId });
+            return TypedResults.Ok(result.Data);
         }
         return TypedResults.Problem(statusCode: result.StatusCode, detail: result.Message);
     }
